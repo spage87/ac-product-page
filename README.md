@@ -1,7 +1,6 @@
 # Implement the Product page design
 
-[adobe XD designs]
-(https://xd.adobe.com/view/e55ea447-4280-4a4b-40ef-1aec76f38e95-936f/)
+[adobe XD designs](https://xd.adobe.com/view/e55ea447-4280-4a4b-40ef-1aec76f38e95-936f/)
 
 ## Fonts
 
