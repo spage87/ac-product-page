@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #282536;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+@media screen and (max-width: 800px) {
+    .desktop-only {
+        display: none;
+    }
+
+    #media {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .mobile-only {
+        display: none;
+    }
+}
