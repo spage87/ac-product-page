@@ -21,3 +21,33 @@ body {
         display: none;
     }
 }
+
+header {
+    background: linear-gradient(0deg,rgba(15.7,14.5,21.2,0.55),rgba(15.7,14.5,21.2,0.55)),url('../img/kick.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 2.4em;
+}
+
+#sub-nav {
+    background-color: rgba(15.7,14.5,21.2,0.65);
+}
+
+#sub-nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+#sub-nav ul li {
+    padding: 1em;
+}
+
+#sub-nav a {
+    text-decoration: none;
+    color: #fff;
+}
