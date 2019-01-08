@@ -7,8 +7,16 @@ body {
 }
 
 @media screen and (max-width: 800px) {
+    body {
+        font-size: 0.8em;
+    }
+
     .desktop-only {
         display: none;
+    }
+
+    #sub-nav {
+        font-size: 0.6em;
     }
 
     #media {
@@ -28,10 +36,24 @@ header {
     background-position: center;
 }
 
+main {
+    padding: 1.3em;
+}
+
 h1 {
     margin: 0;
     font-weight: 600;
     font-size: 2.4em;
+}
+
+h2 {
+    margin-bottom: -0.2em;
+}
+
+hr.h2 {
+    border-top: 1px solid #23BBBE;
+    width: 23%;
+    margin-left: 0;
 }
 
 #sub-nav {
