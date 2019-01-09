@@ -31,10 +31,24 @@ body {
     }
 }
 
-header {
+#top-header {
     background: linear-gradient(0deg,rgba(15.7,14.5,21.2,0.55),rgba(15.7,14.5,21.2,0.55)),url('../img/kick.jpg');
     background-size: cover;
     background-position: center;
+    min-height: 30vh; /* need to be able to see the background image on mobile even if there's no content */
+}
+
+#bottom-header #title {
+    text-align: center;
+}
+
+#carousel-links {
+    text-align: center;
+    padding: 2em;
+}
+
+.active-carousel {
+    color: #23BBBE;
 }
 
 #description, #mailing-list, #pre-order, .box {
@@ -44,7 +58,7 @@ header {
 h1 {
     margin: 0;
     font-weight: 600;
-    font-size: 2.4em;
+    font-size: 1.5em;
 }
 
 h2 {
@@ -57,6 +71,12 @@ hr.h2 {
     color: #23BBBE;
 }
 
+hr.h1 {
+    width: 33%;
+    color: #308AE2;
+    margin-bottom: 2em;
+}
+
 #sub-nav {
     background-color: rgba(15.7,14.5,21.2,0.65);
 }
@@ -64,6 +84,8 @@ hr.h2 {
 #sub-nav ul {
     list-style-type: none;
     display: flex;
+    margin: 0;
+    padding: 1em;
 }
 
 #sub-nav ul li {
@@ -73,6 +95,22 @@ hr.h2 {
 #sub-nav a {
     text-decoration: none;
     color: #fff;
+}
+
+.release {
+    line-height: 2em;
+}
+
+.ubisoft, .release-date {
+    padding: 0 1em;
+}
+
+.ubisoft {
+    border-right: 0.1em solid #fff;
+}
+
+.consoles {
+    letter-spacing: 0.3em;
 }
 
 .box {
