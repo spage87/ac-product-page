@@ -79,6 +79,11 @@ hr.h2 {
     box-shadow: 1px 1px 10px #000;
 }
 
+.edition {
+    font-size: 1em;
+    font-weight: 600;
+}
+
 .version {
     padding: 1em 0;
     display: flex;
