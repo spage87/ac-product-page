@@ -91,6 +91,11 @@ hr.h1 {
     width: 100%;
 }
 
+.sub-nav-stay + div {
+    /* so the content below the sticky navigation doesn't jump so abruptly */
+    margin-top: 4em;
+  }
+
 #sub-nav ul {
     list-style-type: none;
     display: flex;
