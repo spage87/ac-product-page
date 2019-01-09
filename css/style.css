@@ -42,6 +42,16 @@ body {
     min-height: 30vh; /* need to be able to see the background image on mobile even if there's no content */
 }
 
+#main-nav {
+    background-color: rgba(15.7,14.5,21.2,0.65);
+    display: flex;
+    justify-content: space-between;
+}
+
+#logo {
+    font-weight: 600;
+}
+
 #bottom-header #title {
     text-align: center;
 }
@@ -53,6 +63,10 @@ body {
 
 .active-carousel {
     color: #23BBBE;
+}
+
+#main-nav {
+    padding: 0.5em 1em;
 }
 
 #description, #mailing-list, #pre-order, .box {
