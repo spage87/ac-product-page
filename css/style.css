@@ -29,6 +29,10 @@ body {
     .mobile-only {
         display: none;
     }
+
+    .sub-nav {
+        background-color: rgba(15.7,14.5,21.2,0.65);
+    }
 }
 
 #top-header {
@@ -78,7 +82,13 @@ hr.h1 {
 }
 
 #sub-nav {
-    background-color: rgba(15.7,14.5,21.2,0.65);
+    background-color: #181721;
+}
+
+.sub-nav-stay {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 #sub-nav ul {
