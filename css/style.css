@@ -17,7 +17,7 @@ body {
     }
 
     #sub-nav {
-        font-size: 0.6em;
+        font-size: 0.7em;
     }
 
     #media {
@@ -30,13 +30,17 @@ body {
         display: none;
     }
 
+    #top-header {
+        background: linear-gradient(0deg,rgba(15.7,14.5,21.2,0.55),rgba(15.7,14.5,21.2,0.55)),url('../img/kick.jpg');
+    }
+
     .sub-nav {
         background-color: rgba(15.7,14.5,21.2,0.65);
     }
 }
 
 #top-header {
-    background: linear-gradient(0deg,rgba(15.7,14.5,21.2,0.55),rgba(15.7,14.5,21.2,0.55)),url('../img/kick.jpg');
+    background: linear-gradient(0deg,rgba(15.7,14.5,21.2,0.2),rgba(15.7,14.5,21.2,0.2)),url('../img/kick.jpg');
     background-size: cover;
     background-position: center;
     min-height: 30vh; /* need to be able to see the background image on mobile even if there's no content */
@@ -70,7 +74,7 @@ body {
 }
 
 #description, #mailing-list, #pre-order, .box {
-    padding: 1.3em;
+    padding: 2em;
 }
 
 h1 {
