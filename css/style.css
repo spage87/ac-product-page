@@ -40,7 +40,7 @@ body {
 }
 
 #top-header {
-    background: linear-gradient(0deg,rgba(15.7,14.5,21.2,0.2),rgba(15.7,14.5,21.2,0.2)),url('../img/kick.jpg');
+    background: linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('../img/kick.jpg');
     background-size: cover;
     background-position: center;
     min-height: 30vh; /* need to be able to see the background image on mobile even if there's no content */
