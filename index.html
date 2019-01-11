@@ -7,11 +7,12 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
 </head>
 
 <body>
     <header>
-        <div id="top-header">
+        <div id="top-header" v-bind:class="headerBackground">
             <div id="main-nav">
                 <div id="logo">BNG</div>
                 <div id="nav-links"><i class="fas fa-bars"></i></div>
@@ -130,5 +131,6 @@
         </div>
     </main>
     <script src="scripts/app.js" type="text/javascript"></script>
+    <script src="scripts/vue.js"></script>
 </body>
 </html>
