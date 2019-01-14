@@ -25,7 +25,10 @@ function runCarousel() {
     }, 10000)
 }
 
-function nextSlide() {
+function nextSlide(link) {
+    if (link != null) {
+        carouselCount = link;
+    }
     if (carouselCount >= carouselImages.length) {
         carouselCount = 0;
     }
@@ -39,11 +42,15 @@ function nextSlide() {
 
 function createCarouselLinks() {
     var el = document.getElementById("carousel-links");
-    var links = "";
     for (var i = 0; i < carouselImages.length; i++) {
-        links += "<span id='carouselLink" + i + "'>&#9675;</span> ";
+        var child = document.createElement("span");
+        child.setAttribute("id", "carouselLink" + i);
+        child.innerHTML = "&#9675;";
+        child.onclick = function() {
+            nextSlide(i);
+        }
+        el.appendChild(child);
     }
-    el.innerHTML = links;
 }
 
 function activateLink() {
