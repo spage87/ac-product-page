@@ -1,5 +1,5 @@
 var carouselCount = 0;
-var carouselImages = ["kick.jpg", "medusa.jpg"];
+var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg"];
 
 window.onscroll = function() {stickyHeader()};
 window.onload = function() {runCarousel()};
@@ -18,13 +18,43 @@ function stickyHeader() {
 }
 
 function runCarousel() {
+    createCarouselLinks();
+    nextSlide();
     setInterval(() => {
-        if (carouselCount >= carouselImages.length) {
-            carouselCount = 0;
-        }
-        vm.style = {
-            background : "linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('../img/" + carouselImages[carouselCount] + "')"
-        }
-        carouselCount++;
+        nextSlide();
     }, 10000)
+}
+
+function nextSlide() {
+    if (carouselCount >= carouselImages.length) {
+        carouselCount = 0;
+    }
+    activateLink();
+    var el = document.getElementById("top-header");
+    el.style.background = "linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('img/" + carouselImages[carouselCount] + "')",
+    el.style.backgroundPosition = "center center",
+    el.style.backgroundSize = "cover"
+    carouselCount++;
+}
+
+function createCarouselLinks() {
+    var el = document.getElementById("carousel-links");
+    var links = "";
+    for (var i = 0; i < carouselImages.length; i++) {
+        links += "<span id='carouselLink" + i + "'>&#9675;</span> ";
+    }
+    el.innerHTML = links;
+}
+
+function activateLink() {
+    var last = carouselCount-1;
+    if (last <= -1) {
+        last = carouselImages.length-1;
+    }
+    var oldEl = document.getElementById("carouselLink" + last);
+    oldEl.innerHTML= "&#9675;";
+    oldEl.classList.remove("active-carousel");
+    var el = document.getElementById("carouselLink" + carouselCount);
+    el.innerHTML = "&#9679;";
+    el.className = "active-carousel";
 }

@@ -30,20 +30,9 @@ body {
         display: none;
     }
 
-    #top-header {
-        background: linear-gradient(0deg,rgba(15.7,14.5,21.2,0.55),rgba(15.7,14.5,21.2,0.55)),url('../img/kick.jpg');
-    }
-
     .sub-nav {
         background-color: rgba(15.7,14.5,21.2,0.65);
     }
-}
-
-.top-header-1 {
-    background: linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('../img/kick.jpg');
-}
-.top-header-2 {
-    background: linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('../img/medusa.jpg');
 }
 
 #top-header {
