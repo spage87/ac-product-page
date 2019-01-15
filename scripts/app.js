@@ -25,13 +25,7 @@ function runCarousel() {
     }, 10000)
 }
 
-function nextSlide(link) {
-    if (link != null) {
-        carouselCount = link;
-    }
-    if (carouselCount >= carouselImages.length) {
-        carouselCount = 0;
-    }
+function nextSlide() {
     activateLink();
     var el = document.getElementById("top-header");
     el.style.background = "linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('img/" + carouselImages[carouselCount] + "')",
@@ -46,9 +40,6 @@ function createCarouselLinks() {
         var child = document.createElement("span");
         child.setAttribute("id", "carouselLink" + i);
         child.innerHTML = "&#9675;";
-        child.onclick = function() {
-            nextSlide(i);
-        }
         el.appendChild(child);
     }
 }
