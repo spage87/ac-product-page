@@ -22,7 +22,7 @@ function runCarousel() {
     nextSlide();
     setInterval(() => {
         nextSlide();
-    }, 10000)
+    }, 2000)
 }
 
 function nextSlide() {
