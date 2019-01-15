@@ -183,7 +183,7 @@ hr.h1 {
 }
 
 button, input[type="button"] {
-    background-color: #308AE2;
+    background: linear-gradient(#308AE2, #23BBBE);
     border: none;
     padding: 1em 2.3em;
     color: #fff;
