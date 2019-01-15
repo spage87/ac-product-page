@@ -49,6 +49,9 @@ function activateLink() {
     if (last <= -1) {
         last = carouselImages.length-1;
     }
+    if (carouselCount >= carouselImages.length) {
+        carouselCount = 0;
+    }
     var oldEl = document.getElementById("carouselLink" + last);
     oldEl.innerHTML= "&#9675;";
     oldEl.classList.remove("active-carousel");
