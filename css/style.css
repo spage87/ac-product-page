@@ -9,7 +9,7 @@ body {
 
 @media screen and (max-width: 800px) {
     body {
-        font-size: 0.8em;
+        font-size: 0.9em;
     }
 
     .desktop-only {
@@ -17,7 +17,7 @@ body {
     }
 
     #sub-nav {
-        font-size: 0.7em;
+        font-size: 0.8em;
     }
 
     #media {
@@ -123,6 +123,10 @@ hr.h1 {
 #sub-nav a {
     text-decoration: none;
     color: #fff;
+}
+
+.sub-active {
+    border-bottom: #23BBBE 2px solid;
 }
 
 .release {

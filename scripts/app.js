@@ -1,11 +1,12 @@
+var subNav = document.getElementById("sub-nav");
+var subNavLocation = subNav.offsetTop;
+var sections = ["overview", "media", "description", "pre-order", "mailing-list"];
 var carouselCount = 0;
 var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg"];
 
-window.onscroll = function() {stickyHeader()};
-window.onload = function() {runCarousel()};
+window.onscroll = function() {stickyHeader(); activeSubLink();};
+window.onload = function() {runCarousel(); activeSubLink();};
 
-var subNav = document.getElementById("sub-nav");
-subNavLocation = subNav.offsetTop;
 
 function stickyHeader() {
     if (window.pageYOffset > subNavLocation) {
@@ -14,6 +15,25 @@ function stickyHeader() {
     } else {
         subNav.classList.add("sub-nav");
         subNav.classList.remove("sub-nav-stay");
+    }
+}
+
+function activeSubLink() {
+    var scrollPosY = window.pageYOffset;
+    for (var i = 0; i < sections.length; i++) {
+        var location = document.getElementById(sections[i]).offsetTop;
+        var bottom = location + document.getElementById(sections[i]).offsetHeight;
+        if (scrollPosY >= location && scrollPosY <= bottom) {
+            removeActiveClass();
+            document.getElementById(sections[i] + "-link").classList.add("sub-active");
+        }
+    }
+}
+
+function removeActiveClass() {
+    var elements = document.getElementsByClassName("sub-active");
+    while (elements.length) {
+        elements[0].classList.remove("sub-active");
     }
 }
 
