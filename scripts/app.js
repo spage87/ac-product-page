@@ -4,9 +4,21 @@ var sections = ["overview", "media", "description", "pre-order", "mailing-list"]
 var carouselCount = 0;
 var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg"];
 
-window.onscroll = function() {stickyHeader(); activeSubLink();};
-window.onload = function() {runCarousel(); activeSubLink();};
+window.onscroll = function () { stickyHeader(); activeSubLink(); };
+window.onload = function () {  removeSections(); runCarousel(); activeSubLink(); };
 
+function removeSections() {
+    var elements = [];
+    if (document.documentElement.clientWidth < 800) {
+        elements = document.getElementsByClassName("desktop-only");
+    } else {
+        elements = document.getElementsByClassName("mobile-only");
+    }
+    for (var i = 0; i < elements.length; i++) {
+        var el = elements[i];
+        el.parentNode.removeChild(el);
+    }
+}
 
 function stickyHeader() {
     if (window.pageYOffset > subNavLocation) {
@@ -21,7 +33,10 @@ function stickyHeader() {
 function activeSubLink() {
     var scrollPosY = window.pageYOffset;
     for (var i = 0; i < sections.length; i++) {
-        var location = document.getElementById(sections[i]).offsetTop;
+        var el = document.getElementById(sections[i]);
+        if (el == null)
+            return;
+        var location = el.offsetTop;
         var bottom = location + document.getElementById(sections[i]).offsetHeight;
         if (scrollPosY >= location && scrollPosY <= bottom) {
             removeActiveClass();
@@ -49,8 +64,8 @@ function nextSlide() {
     activateLink();
     var el = document.getElementById("top-header");
     el.style.background = "linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('img/" + carouselImages[carouselCount] + "')",
-    el.style.backgroundPosition = "center center",
-    el.style.backgroundSize = "cover"
+        el.style.backgroundPosition = "center center",
+        el.style.backgroundSize = "cover"
     carouselCount++;
 }
 
@@ -65,15 +80,15 @@ function createCarouselLinks() {
 }
 
 function activateLink() {
-    var last = carouselCount-1;
+    var last = carouselCount - 1;
     if (last <= -1) {
-        last = carouselImages.length-1;
+        last = carouselImages.length - 1;
     }
     if (carouselCount >= carouselImages.length) {
         carouselCount = 0;
     }
     var oldEl = document.getElementById("carouselLink" + last);
-    oldEl.innerHTML= "&#9675;";
+    oldEl.innerHTML = "&#9675;";
     oldEl.classList.remove("active-carousel");
     var el = document.getElementById("carouselLink" + carouselCount);
     el.innerHTML = "&#9679;";

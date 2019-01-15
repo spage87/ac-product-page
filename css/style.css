@@ -19,10 +19,6 @@ body {
     #sub-nav {
         font-size: 0.8em;
     }
-
-    #media {
-        display: none;
-    }
 }
 
 @media screen and (min-width: 801px) {
