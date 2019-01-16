@@ -14,8 +14,8 @@ function removeSections() {
     } else {
         elements = document.getElementsByClassName("mobile-only");
     }
-    for (var i = 0; i < elements.length; i++) {
-        var el = elements[i];
+    while (elements.length) {
+        var el = elements[0];
         el.parentNode.removeChild(el);
     }
 }
@@ -34,13 +34,13 @@ function activeSubLink() {
     var scrollPosY = window.pageYOffset;
     for (var i = 0; i < sections.length; i++) {
         var el = document.getElementById(sections[i]);
-        if (el == null)
-            return;
-        var location = el.offsetTop;
-        var bottom = location + document.getElementById(sections[i]).offsetHeight;
-        if (scrollPosY >= location && scrollPosY <= bottom) {
-            removeActiveClass();
-            document.getElementById(sections[i] + "-link").classList.add("sub-active");
+        if (el != null) {
+            var location = el.offsetTop;
+            var bottom = location + document.getElementById(sections[i]).offsetHeight;
+            if (scrollPosY >= location && scrollPosY <= bottom) {
+                removeActiveClass();
+                document.getElementById(sections[i] + "-link").classList.add("sub-active");
+            }
         }
     }
 }
