@@ -21,16 +21,6 @@ body {
     }
 }
 
-@media screen and (min-width: 801px) {
-    .mobile-only {
-        display: none;
-    }
-
-    .sub-nav {
-        background-color: rgba(15.7,14.5,21.2,0.65);
-    }
-}
-
 #top-header {
     background-size: cover;
     background-position: center;
@@ -64,7 +54,7 @@ body {
     padding: 0.5em 1em;
 }
 
-#description, #mailing-list, #pre-order, .box {
+#media, #description, #mailing-list, #pre-order, .box {
     padding: 2em;
 }
 
@@ -92,6 +82,7 @@ hr.h1 {
 
 #sub-nav {
     background-color: #181721;
+    z-index: 10;
 }
 
 .sub-nav-stay {
@@ -168,6 +159,9 @@ hr.h1 {
     background: linear-gradient(0deg, rgba(15.7,14.5,21.2,0.55) 0%, rgba(15.7,14.5,21.2,0.55) 60%, #282536 100%), url('../img/medusa.jpg');
     background-size: cover;
     background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #register-email {
@@ -192,4 +186,57 @@ button, input[type="button"] {
 
 #email-form input{
     margin-top: 1em;
+}
+
+.desktop-row {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 801px) {
+    .mobile-only {
+        display: none;
+    }
+
+    .sub-nav {
+        background-color: rgba(15.7,14.5,21.2,0.65);
+    }
+
+    #mailing-list {
+        height: 50vh;
+    }
+
+    .desktop-row-container:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 60vw;
+        right: -40vw;
+        z-index: 1;
+        background-image: url('../img/outfits.jpg');
+        opacity: 0.03;
+        width: 30vw;
+    }
+
+    .desktop-row-container {
+        position: relative;
+    }
+
+    .desktop-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        position: relative; 
+        z-index: 2;
+    }
+
+    #description {
+        flex: 1;
+    }
+
+    #pre-order {
+        flex: 0 0 30vw;
+    }
+
 }
