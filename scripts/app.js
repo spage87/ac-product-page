@@ -4,24 +4,41 @@ var mobileLinks = ["overview", "description", "pre-order", "mailing-list"];
 var desktopLinks = ["overview", "media", "description", "mailing-list"];
 var carouselCount = 0;
 var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg"];
+var color1, color2, color3;
 
 window.onscroll = function () { stickyHeader(); activeSubLink(); };
 
 window.onload = function () {
+    setUpColors();
     setSubNavigationLocation();
+    setTitleLocation();
     stickyHeader();
     runCarousel();
     activeSubLink();
 };
 
 window.onresize = function () {
+    setUpColors();
     setSubNavigationLocation();
+    setTitleLocation();
     stickyHeader();
     activeSubLink();
 }
 
 function isMobile() {
     return document.documentElement.clientWidth > 800 ? false : true;
+}
+
+function setUpColors() {
+    if (isMobile()) {
+        color1 = "rgba(15.7,14.5,21.2,0.2) 0%";
+        color2 = "0%,rgba(15.7,14.5,21.2,0.2) 80%";
+        color3 = "rgba(15.7,14.5,21.2,1) 100%";
+    } else {
+        color1 = "rgba(15.7,14.5,21.2,0.55) 0%";
+        color2 = "rgba(15.7,14.5,21.2,0.55) 60%";
+        color3 = "#282536 100%";
+    }
 }
 
 function stickyHeader() {
@@ -51,11 +68,20 @@ function setSubNavigationLocation() {
 }
 
 function setTitleLocation() {
-    if (!isMobile()) {
-        var location = document.getElementById("sub-nav").clientHeight;
-    } else {
+    var el = document.getElementById("title");
 
+    if (isMobile()){
+        // in case it's a resize, remove any unneeded styling
+        el.removeAttribute("style");
+        return;
     }
+
+    var location = subNavLocation + document.getElementById("sub-nav").clientHeight;
+    var el = document.getElementById("title");
+    el.style.position = "absolute";
+    el.style.top = location;
+    el.style.height = document.getElementById("top-header").clientHeight - location;
+
 }
 
 function activeSubLink() {
@@ -91,10 +117,9 @@ function runCarousel() {
 function nextSlide() {
     activateLink();
     var el = document.getElementById("top-header");
-
     var backgroundPosition =  isMobile() ? "center center" : "top center";
 
-    el.style.background = "linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('img/" + carouselImages[carouselCount] + "')",
+    el.style.background = "linear-gradient(180deg," + color1 + "," + color2 + "," + color3 + "),url('img/" + carouselImages[carouselCount] + "')",
     el.style.backgroundPosition = backgroundPosition,
     el.style.backgroundSize = "cover"
     carouselCount++;
