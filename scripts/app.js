@@ -1,36 +1,65 @@
 var subNav = document.getElementById("sub-nav");
 var subNavLocation = subNav.offsetTop;
-var sections = ["overview", "media", "description", "pre-order", "mailing-list"];
+var mobileLinks = ["overview", "description", "pre-order", "mailing-list"];
+var desktopLinks = ["overview", "media", "description", "mailing-list"];
 var carouselCount = 0;
 var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg"];
 
 window.onscroll = function () { stickyHeader(); activeSubLink(); };
-window.onload = function () {  removeSections(); runCarousel(); activeSubLink(); };
 
-function removeSections() {
-    var elements = [];
-    if (document.documentElement.clientWidth < 800) {
-        elements = document.getElementsByClassName("desktop-only");
-    } else {
-        elements = document.getElementsByClassName("mobile-only");
-    }
-    while (elements.length) {
-        var el = elements[0];
-        el.parentNode.removeChild(el);
-    }
+window.onload = function () {
+    setSubNavigationLocation();
+    stickyHeader();
+    runCarousel();
+    activeSubLink();
+};
+
+window.onresize = function () {
+    setSubNavigationLocation();
+    stickyHeader();
+    activeSubLink();
+}
+
+function isMobile() {
+    return document.documentElement.clientWidth > 800 ? false : true;
 }
 
 function stickyHeader() {
     if (window.pageYOffset > subNavLocation) {
         subNav.classList.add("sub-nav-stay");
         subNav.classList.remove("sub-nav");
+        // remove original location
+        subNav.removeAttribute("style");
     } else {
         subNav.classList.add("sub-nav");
         subNav.classList.remove("sub-nav-stay");
+        // set back to original location
+        setSubNavigationLocation();
+    }
+}
+
+function setSubNavigationLocation() {
+    if (isMobile()) {
+        subNav.style.position = "static";
+        subNav.style.top = "auto";
+    } else {
+        var el = document.getElementById("main-nav");
+        subNavLocation = el.offsetTop + el.clientHeight;
+        subNav.style.position = "absolute";
+        subNav.style.top = subNavLocation;
+    }
+}
+
+function setTitleLocation() {
+    if (!isMobile()) {
+        var location = document.getElementById("sub-nav").clientHeight;
+    } else {
+
     }
 }
 
 function activeSubLink() {
+    var sections = isMobile() ? mobileLinks : desktopLinks;
     var scrollPosY = window.pageYOffset;
     for (var i = 0; i < sections.length; i++) {
         var el = document.getElementById(sections[i]);
@@ -47,9 +76,8 @@ function activeSubLink() {
 
 function removeActiveClass() {
     var elements = document.getElementsByClassName("sub-active");
-    while (elements.length) {
+    while (elements.length)
         elements[0].classList.remove("sub-active");
-    }
 }
 
 function runCarousel() {
@@ -63,9 +91,12 @@ function runCarousel() {
 function nextSlide() {
     activateLink();
     var el = document.getElementById("top-header");
+
+    var backgroundPosition =  isMobile() ? "center center" : "top center";
+
     el.style.background = "linear-gradient(180deg,rgba(15.7,14.5,21.2,0.2) 0%,rgba(15.7,14.5,21.2,0.2) 80%,rgba(15.7,14.5,21.2,1) 100%),url('img/" + carouselImages[carouselCount] + "')",
-        el.style.backgroundPosition = "center center",
-        el.style.backgroundSize = "cover"
+    el.style.backgroundPosition = backgroundPosition,
+    el.style.backgroundSize = "cover"
     carouselCount++;
 }
 
@@ -81,12 +112,11 @@ function createCarouselLinks() {
 
 function activateLink() {
     var last = carouselCount - 1;
-    if (last <= -1) {
+    if (last <= -1)
         last = carouselImages.length - 1;
-    }
-    if (carouselCount >= carouselImages.length) {
+    if (carouselCount >= carouselImages.length)
         carouselCount = 0;
-    }
+
     var oldEl = document.getElementById("carouselLink" + last);
     oldEl.innerHTML = "&#9675;";
     oldEl.classList.remove("active-carousel");

@@ -19,6 +19,10 @@ body {
     #sub-nav {
         font-size: 0.8em;
     }
+
+    #top-header {
+        background-position: center center;
+    }
 }
 
 #top-header {
@@ -198,8 +202,21 @@ button, input[type="button"] {
         display: none;
     }
 
+    #main-nav {
+        padding: 2em;
+    }
+
+    #sub-nav {
+        background-color: rgba(15.7,14.5,21.2,0.85);
+    }
+
     .sub-nav {
-        background-color: rgba(15.7,14.5,21.2,0.65);
+        width: 100%;
+    }
+
+    #top-header {
+        background-position: top center;
+        min-height: 80vh;
     }
 
     #mailing-list {
