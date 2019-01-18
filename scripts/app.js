@@ -9,15 +9,15 @@ var color1, color2, color3;
 window.onscroll = function () { stickyHeader(); activeSubLink(); };
 
 window.onload = function () {
-    setUpColors();
-    setSubNavigationLocation();
-    setTitleLocation();
-    stickyHeader();
+    setup();
     runCarousel();
-    activeSubLink();
 };
 
 window.onresize = function () {
+    setup();
+}
+
+function setup() {
     setUpColors();
     setSubNavigationLocation();
     setTitleLocation();
@@ -107,11 +107,41 @@ function removeActiveClass() {
 }
 
 function runCarousel() {
+    if (!isMobile()) {
+        createCarouselThumbs();
+    }
     createCarouselLinks();
     nextSlide();
     setInterval(() => {
         nextSlide();
     }, 2000)
+}
+
+function createCarouselThumbs() {
+    var el = document.getElementById("carousel-thumbs");
+    var html = "";
+    for (var i = 0; i < carouselImages.length; i++) {
+        html += "<img src='img/thumbs/" + carouselImages[i] + "'>";
+    }
+    el.innerHTML = html;
+
+    createThumbControl();
+}
+
+function createThumbControl() {
+    var totalWidth = document.documentElement.clientWidth;
+    var elWidth = document.getElementById("carousel-thumbs").scrollWidth;
+    var totalImages = carouselImages.length;
+
+    var each = elWidth/totalImages;
+    var sections = totalWidth/each;
+
+    var el = document.getElementById("thumb-control");
+    var controls = "";
+    for (var i=0; i <= sections; i++) {
+        controls += "&#9675;";
+    }
+    el.innerHTML = controls;
 }
 
 function nextSlide() {

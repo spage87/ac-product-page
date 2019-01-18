@@ -206,6 +206,16 @@ button, input[type="button"] {
     flex-direction: column;
 }
 
+#carousel-thumbs {
+    width: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#carousel-thumbs img {
+    margin-right: var(--main-padding);
+}
+
 @media screen and (min-width: 801px) {
     :root {
         /* sizes */
