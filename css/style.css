@@ -187,7 +187,6 @@ hr.h1 {
 
 #register-email, button, input[type="button"], .box {
     border-radius: 0.5em;
-    font-family : inherit;
 }
 
 button, input[type="button"] {
@@ -196,6 +195,7 @@ button, input[type="button"] {
     padding: 1em 2.3em;
     color: #fff;
     font-weight: bold;
+    font-family : inherit;
 }
 
 #email-form input{
@@ -240,8 +240,14 @@ button, input[type="button"] {
         font-size: 1.2em;
     }
 
+    #email-form input[type="button"] {
+        padding: 0.5em 2em;
+    }
+
     #main-nav {
-        padding: 2em;
+        padding: 1em;
+        font-size: 1.3em;
+        opacity: 0.5;
     }
 
     #sub-nav {
@@ -319,4 +325,7 @@ button, input[type="button"] {
         flex: 0 0 30vw;
     }
 
+    #email-form {
+        display: flex;
+    }
 }

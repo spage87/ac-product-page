@@ -90,7 +90,7 @@ function activeSubLink() {
     for (var i = 0; i < sections.length; i++) {
         var el = document.getElementById(sections[i]);
         if (el != null) {
-            var location = el.offsetTop;
+            var location = getElementLocationInDocument(el);
             var bottom = location + document.getElementById(sections[i]).offsetHeight;
             if (scrollPosY >= location && scrollPosY <= bottom) {
                 removeActiveClass();
@@ -98,6 +98,17 @@ function activeSubLink() {
             }
         }
     }
+}
+
+function getElementLocationInDocument(el) {
+    var location = 0;
+    if (el.offsetParent) {
+        do {
+            location += el.offsetTop;
+            el = el.offsetParent;
+        } while (el);
+    }
+    return location >= 0 ? location : 0;
 }
 
 function removeActiveClass() {
