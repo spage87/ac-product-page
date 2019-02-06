@@ -70,7 +70,7 @@ function setSubNavigationLocation() {
 function setTitleLocation() {
     var el = document.getElementById("title");
 
-    if (isMobile()){
+    if (isMobile()) {
         // in case it's a resize, remove any unneeded styling
         el.removeAttribute("style");
         return;
@@ -142,7 +142,7 @@ function createCarouselThumbs() {
 }
 
 function createThumbControl(promises) {
-    
+
     // make sure images are loaded
     Promise.all(promises).then(() => {
         var thumbs = document.getElementById("carousel-thumbs");
@@ -152,12 +152,12 @@ function createThumbControl(promises) {
         thumbs.style.display = "block";
 
         var visibleWidth = thumbs.offsetWidth;
-        var sections = totalWidth/visibleWidth;
+        var sections = totalWidth / visibleWidth;
 
         var el = document.getElementById("thumb-control");
 
         var controls = "";
-        for (var i=0; i <= sections; i++) {
+        for (var i = 0; i <= sections; i++) {
             controls += "&#9675;";
         }
         el.innerHTML = controls;
@@ -166,10 +166,10 @@ function createThumbControl(promises) {
 }
 
 function loadImage(src) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve) {
         var img = new Image();
-        img.onload = function() {
-           resolve();
+        img.onload = function () {
+            resolve();
         }
         img.src = src;
     })
@@ -179,11 +179,11 @@ function loadImage(src) {
 function nextSlide() {
     activateLink();
     var el = document.getElementById("top-header");
-    var backgroundPosition =  isMobile() ? "center center" : "top center";
+    var backgroundPosition = isMobile() ? "center center" : "top center";
 
     el.style.background = "linear-gradient(180deg," + color1 + "," + color2 + "," + color3 + "),url('img/" + carouselImages[carouselCount] + "')",
-    el.style.backgroundPosition = backgroundPosition,
-    el.style.backgroundSize = "cover"
+        el.style.backgroundPosition = backgroundPosition,
+        el.style.backgroundSize = "cover"
     carouselCount++;
 }
 
