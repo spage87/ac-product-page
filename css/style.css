@@ -208,13 +208,14 @@ button, input[type="button"] {
 }
 
 #carousel-thumbs {
-    width: fit-content;
     white-space: nowrap;
     overflow: hidden;
+    display: inline-block;
 }
 
 #carousel-thumbs img {
-    margin-right: var(--main-padding);
+    display: inline-block;
+    padding-right: var(--main-padding);
 }
 
 @media screen and (min-width: 801px) {
@@ -329,5 +330,9 @@ button, input[type="button"] {
 
     #email-form {
         display: flex;
+    }
+
+    #thumb-control {
+        font-size: 1.8em;
     }
 }

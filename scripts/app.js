@@ -129,30 +129,51 @@ function runCarousel() {
 }
 
 function createCarouselThumbs() {
+    var promises = [];
     var el = document.getElementById("carousel-thumbs");
     var html = "";
     for (var i = 0; i < carouselImages.length; i++) {
-        html += "<img src='img/thumbs/" + carouselImages[i] + "'>";
+        var src = "img/thumbs/" + carouselImages[i];
+        promises.push(loadImage(src));
+        html += "<img src='" + src + "'>";
     }
     el.innerHTML = html;
-
-    createThumbControl();
+    createThumbControl(promises);
 }
 
-function createThumbControl() {
-    var totalWidth = document.documentElement.clientWidth;
-    var elWidth = document.getElementById("carousel-thumbs").scrollWidth;
-    var totalImages = carouselImages.length;
+function createThumbControl(promises) {
+    
+    // make sure images are loaded
+    Promise.all(promises).then(() => {
+        var thumbs = document.getElementById("carousel-thumbs");
+        var totalWidth = thumbs.offsetWidth;
 
-    var each = elWidth/totalImages;
-    var sections = totalWidth/each;
+        // adjust the styling now we have the full width
+        thumbs.style.display = "block";
 
-    var el = document.getElementById("thumb-control");
-    var controls = "";
-    for (var i=0; i <= sections; i++) {
-        controls += "&#9675;";
-    }
-    el.innerHTML = controls;
+        var visibleWidth = thumbs.offsetWidth;
+        var sections = totalWidth/visibleWidth;
+
+        var el = document.getElementById("thumb-control");
+
+        var controls = "";
+        for (var i=0; i <= sections; i++) {
+            controls += "&#9675;";
+        }
+        el.innerHTML = controls;
+    });
+
+}
+
+function loadImage(src) {
+    return new Promise(function(resolve, reject) {
+        var img = new Image();
+        img.onload = function() {
+           resolve();
+        }
+        img.src = src;
+    })
+
 }
 
 function nextSlide() {
