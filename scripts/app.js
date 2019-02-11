@@ -5,6 +5,7 @@ var desktopLinks = ["overview", "media", "description", "mailing-list"];
 var carouselCount = 0;
 var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg"];
 var color1, color2, color3;
+var thumbsPerPage = 0;
 
 window.onscroll = function () { stickyHeader(); activeSubLink(); };
 
@@ -118,10 +119,10 @@ function removeActiveClass() {
 }
 
 function runCarousel() {
-    if (!isMobile()) {
+    if (!isMobile())
         createCarouselThumbs();
-    }
-    createCarouselLinks();
+    else
+        createCarouselLinks();
     nextSlide();
     setInterval(() => {
         nextSlide();
@@ -129,47 +130,69 @@ function runCarousel() {
 }
 
 function createCarouselThumbs() {
-    var promises = [];
+    createThumbControl(null);
+}
+
+function createThumbs(start) {
     var el = document.getElementById("carousel-thumbs");
+    var limit = start + thumbsPerPage;
     var html = "";
-    for (var i = 0; i < carouselImages.length; i++) {
-        var src = "img/thumbs/" + carouselImages[i];
-        promises.push(loadImage(src));
-        html += "<img src='" + src + "'>";
+    for (var i = start; i < limit; i++) {
+        if (carouselImages[i] != null) {
+            var src = "img/thumbs/" + carouselImages[i];
+            html += "<img src='" + src + "'>";
+        }
     }
     el.innerHTML = html;
-    createThumbControl(promises);
 }
 
 function createThumbControl(promises) {
 
-    // make sure images are loaded
-    Promise.all(promises).then(() => {
-        var thumbs = document.getElementById("carousel-thumbs");
-        var totalWidth = thumbs.offsetWidth;
+        loadImage("img/thumbs/" + carouselImages[0]).then((img) => {
+            var thumbs = document.getElementById("carousel-thumbs");
+            var visibleWidth = thumbs.offsetWidth;
+            thumbs.append(img);
+            var imgWidth = thumbs.firstElementChild.offsetWidth;
+            thumbsPerPage = Math.floor(visibleWidth/imgWidth);
+            var sections = Math.floor(carouselImages.length/thumbsPerPage); // floor because we start at 0
+            var el = document.getElementById("thumb-control");
+            for (var i = 0; i <= sections; i++) {
+                var child = document.createElement("span");
+                child.setAttribute("id", "thumbNavigation" + i);
+                child.innerHTML = "&#9675;";
+                el.appendChild(child);
+            }
+            // initial set up so start at 0
+            setThumbNavigationActive(0);
+            createThumbs(0);
+        });
+}
 
-        // adjust the styling now we have the full width
-        thumbs.style.display = "block";
+function setThumbNavigationActive(i) {
+    var el = document.getElementById("thumbNavigation" + i);
 
-        var visibleWidth = thumbs.offsetWidth;
-        var sections = totalWidth / visibleWidth;
+    var oldEl = document.getElementsByClassName("active-carousel")[0];
 
-        var el = document.getElementById("thumb-control");
+    setActiveBullet(oldEl, el);
+}
 
-        var controls = "";
-        for (var i = 0; i <= sections; i++) {
-            controls += "&#9675;";
-        }
-        el.innerHTML = controls;
-    });
+function setActiveBullet(oldEl, newEl) {
+    if (newEl == null)
+        return;
 
+    if (oldEl != null) {
+        oldEl.innerHTML = "&#9675;";
+        oldEl.classList.remove("active-carousel");
+    }
+    newEl.innerHTML = "&#9679;";
+    newEl.className = "active-carousel";
 }
 
 function loadImage(src) {
     return new Promise(function (resolve) {
         var img = new Image();
         img.onload = function () {
-            resolve();
+            resolve(img);
         }
         img.src = src;
     })
@@ -205,9 +228,16 @@ function activateLink() {
         carouselCount = 0;
 
     var oldEl = document.getElementById("carouselLink" + last);
-    oldEl.innerHTML = "&#9675;";
-    oldEl.classList.remove("active-carousel");
     var el = document.getElementById("carouselLink" + carouselCount);
-    el.innerHTML = "&#9679;";
-    el.className = "active-carousel";
+    setActiveBullet(oldEl, el);
 }
+
+document, addEventListener('click', function (event) {
+
+    if (event.target.id.startsWith('thumbNavigation')) {
+        var i = event.target.id.replace('thumbNavigation', '');
+        setThumbNavigationActive(i);
+        createThumbs(i*thumbsPerPage);
+    }
+
+})

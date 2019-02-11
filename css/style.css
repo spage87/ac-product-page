@@ -210,7 +210,7 @@ button, input[type="button"] {
 #carousel-thumbs {
     white-space: nowrap;
     overflow: hidden;
-    display: inline-block;
+    display: block;
 }
 
 #carousel-thumbs img {
@@ -334,5 +334,9 @@ button, input[type="button"] {
 
     #thumb-control {
         font-size: 1.8em;
+    }
+
+    #thumb-control span {
+        cursor: pointer;
     }
 }
