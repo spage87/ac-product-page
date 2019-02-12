@@ -148,24 +148,24 @@ function createThumbs(start) {
 
 function createThumbControl(promises) {
 
-        loadImage("img/thumbs/" + carouselImages[0]).then((img) => {
-            var thumbs = document.getElementById("carousel-thumbs");
-            var visibleWidth = thumbs.offsetWidth;
-            thumbs.append(img);
-            var imgWidth = thumbs.firstElementChild.offsetWidth;
-            thumbsPerPage = Math.floor(visibleWidth/imgWidth);
-            var sections = Math.floor(carouselImages.length/thumbsPerPage); // floor because we start at 0
-            var el = document.getElementById("thumb-control");
-            for (var i = 0; i <= sections; i++) {
-                var child = document.createElement("span");
-                child.setAttribute("id", "thumbNavigation" + i);
-                child.innerHTML = "&#9675;";
-                el.appendChild(child);
-            }
-            // initial set up so start at 0
-            setThumbNavigationActive(0);
-            createThumbs(0);
-        });
+    loadImage("img/thumbs/" + carouselImages[0]).then((img) => {
+        var thumbs = document.getElementById("carousel-thumbs");
+        var visibleWidth = thumbs.offsetWidth;
+        thumbs.append(img);
+        var imgWidth = thumbs.firstElementChild.offsetWidth;
+        thumbsPerPage = Math.floor(visibleWidth / imgWidth);
+        var sections = Math.floor(carouselImages.length / thumbsPerPage); // floor because we start at 0
+        var el = document.getElementById("thumb-control");
+        for (var i = 0; i <= sections; i++) {
+            var child = document.createElement("span");
+            child.setAttribute("id", "thumbNavigation" + i);
+            child.innerHTML = "&#9675;";
+            el.appendChild(child);
+        }
+        // initial set up so start at 0
+        setThumbNavigationActive(0);
+        createThumbs(0);
+    });
 }
 
 function setThumbNavigationActive(i) {
@@ -237,7 +237,7 @@ document, addEventListener('click', function (event) {
     if (event.target.id.startsWith('thumbNavigation')) {
         var i = event.target.id.replace('thumbNavigation', '');
         setThumbNavigationActive(i);
-        createThumbs(i*thumbsPerPage);
+        createThumbs(i * thumbsPerPage);
     }
 
 })
