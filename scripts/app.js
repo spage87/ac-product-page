@@ -126,7 +126,7 @@ function runCarousel() {
     nextSlide();
     setInterval(() => {
         nextSlide();
-    }, 2000)
+    }, 3000)
 }
 
 function createCarouselThumbs() {
