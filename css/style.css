@@ -208,12 +208,13 @@ button, input[type="button"] {
 #carousel-thumbs {
     white-space: nowrap;
     overflow: hidden;
-    display: block;
+    display: flex;
+    justify-content: space-between;
 }
 
 #carousel-thumbs img {
-    display: inline-block;
-    padding-right: var(--main-padding);
+    /*display: inline-block;
+    padding-right: var(--main-padding);*/
 }
 
 @media screen and (min-width: 801px) {

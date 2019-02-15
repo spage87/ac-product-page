@@ -3,9 +3,10 @@ var subNavLocation = subNav.offsetTop;
 var mobileLinks = ["overview", "description", "pre-order", "mailing-list"];
 var desktopLinks = ["overview", "media", "description", "mailing-list"];
 var carouselCount = 0;
-var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg"];
+var carouselImages = ["kick.jpg", "necksnap.jpg", "outfits.jpg", "boat.jpg", "horse.jpg", "shield.jpg", "chitchat.jpg", "cliffs.png", "stab.png"];
 var color1, color2, color3;
 var thumbsPerPage = 0;
+var thumbWidth = 250; // this is a static number - is always 250px
 
 window.onscroll = function () { stickyHeader(); activeSubLink(); };
 
@@ -19,6 +20,8 @@ window.onresize = function () {
 }
 
 function setup() {
+    if (!isMobile())
+        createThumbControl();
     setUpColors();
     setSubNavigationLocation();
     setTitleLocation();
@@ -119,18 +122,12 @@ function removeActiveClass() {
 }
 
 function runCarousel() {
-    if (!isMobile())
-        createCarouselThumbs();
-    else
+    if (isMobile())
         createCarouselLinks();
     nextSlide();
     setInterval(() => {
         nextSlide();
     }, 3000)
-}
-
-function createCarouselThumbs() {
-    createThumbControl(null);
 }
 
 function createThumbs(start) {
@@ -146,16 +143,13 @@ function createThumbs(start) {
     el.innerHTML = html;
 }
 
-function createThumbControl(promises) {
+function createThumbControl() {
 
-    loadImage("img/thumbs/" + carouselImages[0]).then((img) => {
-        var thumbs = document.getElementById("carousel-thumbs");
-        var visibleWidth = thumbs.offsetWidth;
-        thumbs.append(img);
-        var imgWidth = thumbs.firstElementChild.offsetWidth;
-        thumbsPerPage = Math.floor(visibleWidth / imgWidth);
-        var sections = Math.floor(carouselImages.length / thumbsPerPage); // floor because we start at 0
-        var el = document.getElementById("thumb-control");
+    var viewWidth = document.body.clientWidth;
+    thumbsPerPage = Math.floor(viewWidth/thumbWidth - 1); // leave some space
+    var sections = Math.floor(carouselImages.length / thumbsPerPage); // floor because we start at 0
+    var el = document.getElementById("thumb-control");
+    el.innerHTML = "";
         for (var i = 0; i <= sections; i++) {
             var child = document.createElement("span");
             child.setAttribute("id", "thumbNavigation" + i);
@@ -165,7 +159,7 @@ function createThumbControl(promises) {
         // initial set up so start at 0
         setThumbNavigationActive(0);
         createThumbs(0);
-    });
+
 }
 
 function setThumbNavigationActive(i) {
